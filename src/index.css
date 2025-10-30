@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Outfit:wght@100..900&display=swap");
+@import "tailwindcss";
+@theme {
+  --font-sans: "Roboto", sans-serif;
+}
+* {
+  font-family: "Outfit", sans-serif;
+}
+.heading-font {
+  font-family: "Cormorant Garamond", serif;
+}
+
+/* Text */
+@layer base {
+  h1 {
+    @apply py-3 text-black;
+  }
+  h2 {
+    @apply text-black;
+  }
+  h3 {
+    @apply text-[1.875rem] font-medium leading-[150%] text-black mb-4;
+  }
+  h4,
+  h5 {
+    @apply text-[1.5rem] font-medium leading-[150%] text-black mb-3;
+  }
+  p,
+  span {
+    @apply text-[#565D6DFF] font-normal m-0 text-[18px];
+  }
+}
+b,
+strong {
+  @apply font-bold;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  @apply cursor-pointer appearance-none;
+}
+
+/* Custom Subscribe button css */
+/* .custom-bg-transition {
+  transition: background-color 400ms;
+}
+
+.custom-bg-transition:hover {
+  transition-duration: 0s;
+}
+.group:not(:hover) .only-hover-transition {
+  transition: none !important;
+} */
+
+/* Toastify theme */
+.Toastify__toast {
+  background-color: #fffbf3;
+  color: #cf928a;
+  text-align: left;
+  font-family: "Outfit", sans-serif;
+}
+.Toastify__close-button > svg {
+  fill: #000 !important;
+  color: #000 !important;
+}
+.Toastify__close-button {
+  color: #000;
+}
+.Toastify__progress-bar {
+  background: #dd7282;
+}
+
+.card {
+  position: relative;
+  height: 500px; /* or any ratio, e.g. 1 / 1 for square cards */
+  perspective: 1000px;
+  border-radius: 8px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.999s;
+}
+
+.card.active .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.card-front > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* keeps image proportional inside the card */
+  border-radius: 8px;
+}
+/* Carousel */
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #444;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* shadow-[0px_4px_8px_#171a1f0D] hover:shadow-[0px_0px_4px_#171a1f1A,0px_0px_8px_#171a1f33] transition-shadow duration-300  */
+
+/* Tooltip */
+.tool-tip {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: all 0.2s ease-in-out;
+}
+.tool-tip-outer:hover .tool-tip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
