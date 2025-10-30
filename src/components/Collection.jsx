@@ -1,0 +1,96 @@
+import React, { useEffect, useRef } from "react";
+import { assets, products } from "../assets/assets";
+import Button from "./Buttons";
+export default function Collection() {
+  const [isFlipped, setIsFlipped] = React.useState(0);
+  const productsList = products;
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // If click is inside any card, do nothing
+      const clickedInsideAnyCard = cardRefs.current.some(
+        (ref) => ref && ref.contains(event.target)
+      );
+
+      if (!clickedInsideAnyCard) {
+        setIsFlipped(0);
+      }
+    };
+
+    // Use 'click' instead of 'mousedown' so it fires AFTER your card's onClick
+    document.addEventListener("click", handleClickOutside);
+
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+  return (
+    <div className="text-center">
+      <h2 className="heading-font max-xl:text-3xl xl:text-4xl [@media(min-width:1440px)]:text-5xl font-semibold leading-[1.2]">
+        Our Signature Collection
+      </h2>
+      <p className="mx-auto mt-4 text-[15px] sm:text-[16px]">
+        Explore our curated selection of premium candles, each crafted to
+        elevate your space and enhance your well-being.
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-8">
+        {productsList.map((product, index) => (
+          <div
+            key={product.id}
+            className={`border-gray-300 rounded-[8px] cursor-pointer card max-sm:!h-[400px] ${
+              isFlipped === index + 1 ? "active" : ""
+            }`}
+            onClick={() => {
+              setIsFlipped(index + 1 === isFlipped ? 0 : index + 1);
+            }}
+            ref={(el) => (cardRefs.current[index] = el)}
+          >
+            <div className="card-inner">
+              <div className="card-front group">
+                <img
+                  src={assets.product1}
+                  alt="Collection Item"
+                  className="w-full h-auto rounded-[8px] group-hover:scale-102 transition ease-in-out"
+                />
+              </div>
+              <div className="tool-tip-outer absolute bottom-4 right-4 cursor-pointer p-2">
+                <img
+                  src={assets.flipIcon}
+                  alt="flip-icon"
+                  className="w-6 h-6 flip-icon"
+                />
+                <div
+                  className="tool-tip bg-black border-black rounded-md bottom-[calc(100%+1rem)] shadow text-white text-[12.5px] left-1/2 max-w-[30rem] p-2 pointer-events-none absolute transform translate-x-[-50%] w-max before:content-[''] before:absolute before:bg-black before:border-solid before:border-t-0 before:border-r-0
+  before:border-[1px] before:border-black before:h-4 before:w-4 before:left-[calc(50%-0.5rem)] before:top-[calc(100%-0.5rem)] before:rotate-[-45deg]"
+                >
+                  Click to Flip
+                </div>
+              </div>
+              <div
+                className="card-back relative rounded-[8px] overflow-hidden flex flex-col items-center justify-center text-center p-6"
+                style={{
+                  backgroundImage: `url(${assets.product1})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                {/* Frosted glass overlay */}
+                <div className="absolute inset-0 bg-black/15 backdrop-blur-[4px]"></div>
+
+                {/* Glass content */}
+                <div className="relative z-10 border border-white/30 bg-white/10 backdrop-blur-lg rounded-[12px] p-4 shadow-lg">
+                  <h3 className="text-white max-xl:text-2xl xl:text-2xl [@media(min-width:1440px)]:text-3xl font-semibold mb-2">
+                    {product.name}
+                  </h3>
+                  <p className="text-gray-200 mb-4 sm:text-[17px] text-left">
+                    {product.description}
+                  </p>
+                  <Button text="Explore" className="mx-auto" />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
