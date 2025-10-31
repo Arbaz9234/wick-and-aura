@@ -8,7 +8,6 @@ export default function Collection() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // If click is inside any card, do nothing
       const clickedInsideAnyCard = cardRefs.current.some(
         (ref) => ref && ref.contains(event.target)
       );
@@ -18,7 +17,6 @@ export default function Collection() {
       }
     };
 
-    // Use 'click' instead of 'mousedown' so it fires AFTER your card's onClick
     document.addEventListener("click", handleClickOutside);
 
     return () => document.removeEventListener("click", handleClickOutside);
@@ -73,7 +71,6 @@ export default function Collection() {
                   backgroundPosition: "center",
                 }}
               >
-                {/* Frosted glass overlay */}
                 <div className="absolute inset-0 bg-black/15 backdrop-blur-[4px]"></div>
 
                 {/* Glass content */}
