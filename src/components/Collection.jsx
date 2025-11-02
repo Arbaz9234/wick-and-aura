@@ -16,9 +16,7 @@ export default function Collection() {
         setIsFlipped(0);
       }
     };
-
     document.addEventListener("click", handleClickOutside);
-
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
   return (
