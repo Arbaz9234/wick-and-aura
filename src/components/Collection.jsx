@@ -11,7 +11,6 @@ export default function Collection() {
       const clickedInsideAnyCard = cardRefs.current.some(
         (ref) => ref && ref.contains(event.target)
       );
-
       if (!clickedInsideAnyCard) {
         setIsFlipped(0);
       }
