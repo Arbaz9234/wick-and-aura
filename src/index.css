@@ -84,7 +84,7 @@ input[type="submit"] {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.999s;
+  transition: transform 0.6s ease;
 }
 
 .card.active .card-inner {
