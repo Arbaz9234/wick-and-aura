@@ -1,24 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { assets, products } from "../assets/assets";
 import Button from "./Buttons";
+import Modal from "./modal";
 export default function Collection() {
-  const [isFlipped, setIsFlipped] = React.useState(0);
+  const [isFlipped, setIsFlipped] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const productsList = products;
   const cardRefs = useRef([]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       const clickedInsideAnyCard = cardRefs.current.some(
-        (ref) => ref && ref.contains(event.target)
+        (ref) => ref && ref.contains(event.target),
       );
-
       if (!clickedInsideAnyCard) {
         setIsFlipped(0);
       }
     };
-
     document.addEventListener("click", handleClickOutside);
-
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
   return (
@@ -74,20 +74,37 @@ export default function Collection() {
                 <div className="absolute inset-0 bg-black/15 backdrop-blur-[4px]"></div>
 
                 {/* Glass content */}
-                <div className="relative z-10 border border-white/30 bg-white/10 backdrop-blur-lg rounded-[12px] p-4 shadow-lg">
+                <div
+                  className="relative z-10 border border-white/30 bg-white/10 backdrop-blur-lg rounded-[12px] p-4 shadow-lg product-details"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <h3 className="text-white max-xl:text-2xl xl:text-2xl [@media(min-width:1440px)]:text-3xl font-semibold mb-2">
                     {product.name}
                   </h3>
                   <p className="text-gray-200 mb-4 sm:text-[17px] text-left">
                     {product.description}
                   </p>
-                  <Button text="Explore" className="mx-auto" />
+                  <Button
+                    text="Explore"
+                    className="mx-auto"
+                    onClick={() => {
+                      setSelectedProduct(product);
+                      setIsModalOpen(true);
+                    }}
+                  />
                 </div>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Product Details Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        product={selectedProduct}
+      />
     </div>
   );
 }

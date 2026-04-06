@@ -1,4 +1,3 @@
-import React from "react";
 import { assets } from "../assets/assets";
 import Button from "./Buttons";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,6 +5,7 @@ import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+// import { useState } from "react";
 export default function Banner({ onShopNowClick }) {
   const pagination = {
     clickable: true,
@@ -13,6 +13,20 @@ export default function Banner({ onShopNowClick }) {
       return `<span class="${className} custom-bullet"></span>`;
     },
   };
+  
+  // const [activeIndex, setActiveIndex] = useState(0);
+  const handleSlideChange = (swiper) => {
+  const bullets = document.querySelectorAll(
+    ".swiper-pagination .custom-bullet"
+  );
+  bullets.forEach((el) =>
+    el.classList.remove("swiper-slide-active")
+  );
+
+  if (bullets[swiper.realIndex]) {
+    bullets[swiper.realIndex].classList.add("swiper-slide-active");
+  }
+};
   return (
     <>
       <div className="mb-[5rem] flex flex-col sm:flex-row border border-gray-400 justify-center items-center">
@@ -36,7 +50,7 @@ export default function Banner({ onShopNowClick }) {
               transition: all 0.3s ease;
             }
             /* Active bullet */
-            .swiper-pagination-bullet-active.custom-bullet {
+            .swiper-slide-active.custom-bullet {
               width: 32px;
               background: white;
             }
@@ -52,8 +66,10 @@ export default function Banner({ onShopNowClick }) {
               disableOnInteraction: false,
             }}
             loop={true}
-            className="h-full w-full"
+            className="h-full w-full swiper-outer"
             pagination={pagination}
+            // ref={parentRef}
+            onSlideChange={handleSlideChange}
           >
             <SwiperSlide>
               <img
