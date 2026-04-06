@@ -74,7 +74,7 @@ input[type="submit"] {
 
 .card {
   position: relative;
-  height: 500px; /* or any ratio, e.g. 1 / 1 for square cards */
+  aspect-ratio: 3 / 4;
   perspective: 1000px;
   border-radius: 8px;
 }
@@ -149,4 +149,8 @@ input[type="submit"] {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
+}
+.card.active .tool-tip {
+  opacity: 0;
+  pointer-events: none;
 }
