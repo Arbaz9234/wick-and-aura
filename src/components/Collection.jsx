@@ -4,8 +4,8 @@ import Button from "./Buttons";
 import Modal from "./modal";
 export default function Collection() {
   const [isFlipped, setIsFlipped] = useState(0);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(products[0]);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const productsList = products;
   const cardRefs = useRef([]);
 
