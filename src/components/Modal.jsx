@@ -12,50 +12,50 @@ export default function Modal({ isOpen, onClose, product }) {
 
   if (!isOpen || !product) return null;
 
-  const icons = [
-    // Sparkles
-    <svg
-      className="w-5 h-5 text-blue-400"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-      />
-    </svg>,
-    // Clock / Timer
-    <svg
-      className="w-5 h-5 text-blue-400"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-      />
-    </svg>,
-    // Leaf
-    <svg
-      className="w-5 h-5 text-blue-400"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-      />
-    </svg>,
-  ];
+  // const icons = [
+  //   // Sparkles
+  //   <svg
+  //     className="w-5 h-5 text-blue-400"
+  //     fill="none"
+  //     stroke="currentColor"
+  //     viewBox="0 0 24 24"
+  //   >
+  //     <path
+  //       strokeLinecap="round"
+  //       strokeLinejoin="round"
+  //       strokeWidth="2"
+  //       d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+  //     />
+  //   </svg>,
+  //   // Clock / Timer
+  //   <svg
+  //     className="w-5 h-5 text-blue-400"
+  //     fill="none"
+  //     stroke="currentColor"
+  //     viewBox="0 0 24 24"
+  //   >
+  //     <path
+  //       strokeLinecap="round"
+  //       strokeLinejoin="round"
+  //       strokeWidth="2"
+  //       d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+  //     />
+  //   </svg>,
+  //   // Leaf
+  //   <svg
+  //     className="w-5 h-5 text-blue-400"
+  //     fill="none"
+  //     stroke="currentColor"
+  //     viewBox="0 0 24 24"
+  //   >
+  //     <path
+  //       strokeLinecap="round"
+  //       strokeLinejoin="round"
+  //       strokeWidth="2"
+  //       d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+  //     />
+  //   </svg>,
+  // ];
 
   return (
     <div
@@ -120,8 +120,8 @@ export default function Modal({ isOpen, onClose, product }) {
           </div>
 
           {/* Right Side: Details */}
-          <div className="md:w-1/2 p-4 flex flex-col items-start">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="md:w-1/2 p-4 flex flex-col items-start text-left">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 ">
               {product.name}
             </h2>
             <p className="text-gray-500 mb-8 leading-relaxed text-[15px] sm:text-[16px]">
@@ -137,7 +137,16 @@ export default function Modal({ isOpen, onClose, product }) {
                     className="flex items-center text-[15px] text-gray-700"
                   >
                     <span className="mr-3 flex-shrink-0">
-                      {icons[idx % icons.length]}
+                      <img
+                        src={
+                          product.featureIcons[
+                            idx % product.featureIcons.length
+                          ]
+                        }
+                        alt="feature icon"
+                        width={20}
+                        height={20}
+                      />
                     </span>
                     <span>{feature}</span>
                   </li>
@@ -146,9 +155,9 @@ export default function Modal({ isOpen, onClose, product }) {
             )}
 
             {/* Price & Buy Now Button */}
-            <div className="mt-auto md:mt-4 flex flex-col sm:flex-row items-center gap-6 self-start">
+            <div className="self-end mt-auto w-full flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="text-2xl font-bold text-gray-900">
-                ${product.price}
+                ₹{product.price}
               </div>
               <Button
                 text="Buy Now"

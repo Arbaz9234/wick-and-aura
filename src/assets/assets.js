@@ -9,6 +9,7 @@ import logoIcon from "./logo-icon.svg";
 import logoText from "./logo-text.svg";
 import product1 from "./product1.jpg";
 import flipIcon from "./flip-icon.svg";
+import descriptionIcon from "./description-icon.svg";
 
 export const assets = {
   logo,
@@ -22,6 +23,7 @@ export const assets = {
   logoText,
   product1,
   flipIcon,
+  descriptionIcon,
 };
 
 export const products = [
@@ -37,6 +39,7 @@ export const products = [
       "Eco-friendly natural soy wax blend",
       "Subtle, sophisticated amber and wood fragrance",
     ],
+    featureIcons: [descriptionIcon, descriptionIcon, descriptionIcon],
   },
   {
     id: "2",
@@ -50,6 +53,7 @@ export const products = [
       "Eco-friendly natural soy wax blend",
       "Subtle, sophisticated amber and wood fragrance",
     ],
+    featureIcons: [descriptionIcon, descriptionIcon, descriptionIcon],
   },
   {
     id: "3",
@@ -63,6 +67,7 @@ export const products = [
       "Eco-friendly natural soy wax blend",
       "Subtle, sophisticated amber and wood fragrance",
     ],
+    featureIcons: [descriptionIcon, descriptionIcon, descriptionIcon],
   },
   {
     id: "4",
@@ -76,6 +81,7 @@ export const products = [
       "Eco-friendly natural soy wax blend",
       "Subtle, sophisticated amber and wood fragrance",
     ],
+    featureIcons: [descriptionIcon, descriptionIcon, descriptionIcon],
   },
   {
     id: "5",
@@ -89,6 +95,7 @@ export const products = [
       "Eco-friendly natural soy wax blend",
       "Subtle, sophisticated amber and wood fragrance",
     ],
+    featureIcons: [descriptionIcon, descriptionIcon, descriptionIcon],
   },
   {
     id: "6",
@@ -102,5 +109,6 @@ export const products = [
       "Eco-friendly natural soy wax blend",
       "Subtle, sophisticated amber and wood fragrance",
     ],
+    featureIcons: [descriptionIcon, descriptionIcon, descriptionIcon],
   },
 ];
