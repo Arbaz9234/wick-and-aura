@@ -3,6 +3,11 @@ import Button from "./Buttons";
 
 export default function Modal({ isOpen, onClose, product }) {
   const [mainImage, setMainImage] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [animating, setAnimating] = useState(false);
+  const [thumbStart, setThumbStart] = useState(0);
+  const mouseDownTarget = React.useRef(null);
+  const maxVisible = 3;
 
   useEffect(() => {
     if (product && product.image && product.image.length > 0) {
@@ -10,7 +15,35 @@ export default function Modal({ isOpen, onClose, product }) {
     }
   }, [product]);
 
-  if (!isOpen || !product) return null;
+  useEffect(() => {
+    let timer;
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      setAnimating(true);
+      // Trigger enter animation on next frame
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setVisible(true));
+      });
+    } else {
+      document.body.style.overflow = "unset";
+      setVisible(false);
+      // Wait for exit animation to finish before unmounting
+      timer = setTimeout(() => setAnimating(false), 300);
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+      if (timer) clearTimeout(timer);
+    };
+  }, [isOpen]);
+
+  const handleClose = () => {
+    setVisible(false);
+    setTimeout(onClose, 300);
+  };
+
+  if (!animating && !isOpen) return null;
+  if (!product) return null;
 
   // const icons = [
   //   // Sparkles
@@ -59,16 +92,29 @@ export default function Modal({ isOpen, onClose, product }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
-      onClick={onClose}
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ${
+        visible ? "bg-black/40 backdrop-blur-sm" : "bg-transparent"
+      }`}
+      onMouseDown={(e) => {
+        mouseDownTarget.current = e.target;
+      }}
+      onClick={(e) => {
+        if (
+          e.target === e.currentTarget &&
+          mouseDownTarget.current === e.currentTarget
+        ) {
+          handleClose();
+        }
+      }}
     >
       <div
-        className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
-        onClick={(e) => e.stopPropagation()}
+        className={`relative flex flex-col w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] transition-all duration-300 ${
+          visible ? "scale-100 opacity-100" : "scale-75 opacity-0"
+        }`}
       >
         {/* Close Button */}
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-4 z-10 p-2 text-gray-500 hover:text-black bg-white/80 backdrop-blur rounded-full shadow-sm transition-transform hover:scale-110"
         >
           <svg
@@ -86,11 +132,12 @@ export default function Modal({ isOpen, onClose, product }) {
           </svg>
         </button>
 
-        <div className="flex flex-col md:flex-row p-4 md:p-8">
+        <div className="overflow-y-auto flex-1">
+          <div className="flex flex-col md:flex-row p-4 md:p-8">
           {/* Left Side: Images */}
           <div className="md:w-1/2 p-4 flex flex-col items-center">
             {/* Main Image */}
-            <div className="w-full aspect-square rounded-xl overflow-hidden mb-6 bg-gray-50 flex items-center justify-center shadow-sm">
+            <div className="w-full max-[768px]:w-[70%] max-[639px]:w-[80%] max-[400px]:w-[100%] aspect-square rounded-xl overflow-hidden mb-6 bg-gray-50 flex items-center justify-center shadow-sm">
               <img
                 src={mainImage}
                 alt={product.name}
@@ -98,24 +145,87 @@ export default function Modal({ isOpen, onClose, product }) {
               />
             </div>
             {/* Thumbnails */}
-            <div className="flex gap-4 overflow-x-auto pb-2 w-full justify-center">
-              {product.image.map((img, index) => (
+            <div className="flex items-center gap-2 w-full justify-center">
+              {product.image.length > maxVisible && (
                 <button
-                  key={index}
-                  onClick={() => setMainImage(img)}
-                  className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                    mainImage === img
-                      ? "border-[#4a24c5]"
-                      : "border-transparent hover:border-gray-300"
-                  }`}
+                  onClick={() => setThumbStart((prev) => Math.max(0, prev - 1))}
+                  disabled={thumbStart === 0}
+                  className="p-1 text-[#c58a8a] hover:text-[#a78181] disabled:opacity-0 transition-opacity"
                 >
-                  <img
-                    src={img}
-                    alt={`${product.name} thumbnail ${index + 1}`}
-                    className="object-cover w-full h-full"
-                  />
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
                 </button>
-              ))}
+              )}
+              {/* 80px thumb + 16px gap = 96px per item; visible width = 3*80 + 2*16 = 272px */}
+              <div
+                className="overflow-hidden"
+                style={{
+                  width: `${maxVisible * 80 + (maxVisible - 1) * 16}px`,
+                }}
+              >
+                <div
+                  className="flex gap-4 transition-transform duration-300 ease-in-out"
+                  style={{
+                    transform: `translateX(-${thumbStart * (80 + 16)}px)`,
+                  }}
+                >
+                  {product.image.map((img, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setMainImage(img)}
+                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                        mainImage === img
+                          ? "border-[#4a24c5]"
+                          : "border-transparent hover:border-gray-300"
+                      }`}
+                    >
+                      <img
+                        src={img}
+                        alt={`${product.name} thumbnail ${index + 1}`}
+                        className={`object-cover w-full h-full opacity-85 hover:opacity-100 transition-opacity ${
+                          mainImage === img ? "opacity-100" : ""
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {product.image.length > maxVisible && (
+                <button
+                  onClick={() =>
+                    setThumbStart((prev) =>
+                      Math.min(product.image.length - maxVisible, prev + 1),
+                    )
+                  }
+                  disabled={thumbStart >= product.image.length - maxVisible}
+                  className="p-1 text-[#c58a8a] hover:text-[#a78181] disabled:opacity-0 transition-opacity"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              )}
             </div>
           </div>
 
@@ -148,25 +258,36 @@ export default function Modal({ isOpen, onClose, product }) {
                         height={20}
                       />
                     </span>
-                    <span>{feature}</span>
+                    <span className="max-[40rem]:text-[15px] sm:text-[16px]">
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>
             )}
 
             {/* Price & Buy Now Button */}
-            <div className="self-end mt-auto w-full flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="text-2xl font-bold text-gray-900">
+            <div className="self-end mt-auto w-full flex sm:flex-row items-center justify-between gap-6">
+              <p className="text-2xl font-bold text-gray-900">
                 ₹{product.price}
-              </div>
+              </p>
               <Button
                 text="Buy Now"
+                className="!mt-0 "
                 onClick={() => {
-                  console.log("Buy Now clicked");
+                  const phone = import.meta.env.VITE_WHATSAPP_NUMBER;
+                  const message = encodeURIComponent(
+                    `I want to buy "${product.name}" candles. Please provide more details.`,
+                  );
+                  window.open(
+                    `https://wa.me/${phone}?text=${message}`,
+                    "_blank",
+                  );
                 }}
               />
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
