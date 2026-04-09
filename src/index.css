@@ -2,6 +2,10 @@
 @import "tailwindcss";
 @theme {
   --font-sans: "Roboto", sans-serif;
+  --breakpoint-xl2: 1800px;
+  --breakpoint-xxl2: 2500px;
+  --breakpoint-sm1: 639px;
+  --breakpoint-sm2: 589px;
 }
 * {
   font-family: "Outfit", sans-serif;
@@ -74,11 +78,8 @@ input[type="submit"] {
 
 .card {
   position: relative;
-  aspect-ratio: 3 / 4;
-  perspective: 1000px;
   border-radius: 8px;
 }
-
 .card-inner {
   width: 100%;
   height: 100%;

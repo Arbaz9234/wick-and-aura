@@ -5,21 +5,37 @@ import Modal from "./modal";
 export default function Collection() {
   const [isFlipped, setIsFlipped] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(products[0]);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const productsList = products;
   const cardRefs = useRef([]);
-
+  const cardMouseDown = useRef(null);
+  const truncateWords = (text, limit) => {
+    const words = text.split(" ");
+    return words.length > limit
+      ? words.slice(0, limit).join(" ") + "..."
+      : text;
+  };
   useEffect(() => {
+    const handleMouseDown = (event) => {
+      cardMouseDown.current = event.target;
+    };
     const handleClickOutside = (event) => {
+      const mouseDownInsideAnyCard = cardRefs.current.some(
+        (ref) => ref && ref.contains(cardMouseDown.current),
+      );
       const clickedInsideAnyCard = cardRefs.current.some(
         (ref) => ref && ref.contains(event.target),
       );
-      if (!clickedInsideAnyCard) {
+      if (!clickedInsideAnyCard && !mouseDownInsideAnyCard) {
         setIsFlipped(0);
       }
     };
+    document.addEventListener("mousedown", handleMouseDown);
     document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
   return (
     <div className="text-center">
@@ -30,15 +46,25 @@ export default function Collection() {
         Explore our curated selection of premium candles, each crafted to
         elevate your space and enhance your well-being.
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-8">
+      <div className="grid max-sm2:grid-cols-1  grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-8">
+        {" "}
+        {/*  sm:grid-cols-2  */}
         {productsList.map((product, index) => (
           <div
             key={product.id}
-            className={`border-gray-300 rounded-[8px] cursor-pointer card max-sm:!h-[400px] ${
+            className={`border-gray-300 rounded-[8px] cursor-pointer card max-sm:!h-[400px] sm1:aspect-[3/4]  ${
               isFlipped === index + 1 ? "active" : ""
             }`}
-            onClick={() => {
-              setIsFlipped(index + 1 === isFlipped ? 0 : index + 1);
+            onMouseDown={(e) => {
+              cardMouseDown.current = e.target;
+            }}
+            onClick={(e) => {
+              if (
+                cardRefs.current[index] &&
+                cardRefs.current[index].contains(cardMouseDown.current)
+              ) {
+                setIsFlipped(index + 1 === isFlipped ? 0 : index + 1);
+              }
             }}
             ref={(el) => (cardRefs.current[index] = el)}
           >
@@ -82,7 +108,7 @@ export default function Collection() {
                     {product.name}
                   </h3>
                   <p className="text-gray-200 mb-4 sm:text-[17px] text-left">
-                    {product.description}
+                    {truncateWords(product.description, 20)}
                   </p>
                   <Button
                     text="Explore"
@@ -90,6 +116,7 @@ export default function Collection() {
                     onClick={() => {
                       setSelectedProduct(product);
                       setIsModalOpen(true);
+                      setIsFlipped(0);
                     }}
                   />
                 </div>

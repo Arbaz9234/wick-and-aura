@@ -13,23 +13,21 @@ export default function Banner({ onShopNowClick }) {
       return `<span class="${className} custom-bullet"></span>`;
     },
   };
-  
+
   // const [activeIndex, setActiveIndex] = useState(0);
   const handleSlideChange = (swiper) => {
-  const bullets = document.querySelectorAll(
-    ".swiper-pagination .custom-bullet"
-  );
-  bullets.forEach((el) =>
-    el.classList.remove("swiper-slide-active")
-  );
+    const bullets = document.querySelectorAll(
+      ".swiper-pagination .custom-bullet",
+    );
+    bullets.forEach((el) => el.classList.remove("swiper-slide-active"));
 
-  if (bullets[swiper.realIndex]) {
-    bullets[swiper.realIndex].classList.add("swiper-slide-active");
-  }
-};
+    if (bullets[swiper.realIndex]) {
+      bullets[swiper.realIndex].classList.add("swiper-slide-active");
+    }
+  };
   return (
     <>
-      <div className="mb-[5rem] flex flex-col sm:flex-row border border-gray-400 justify-center items-center">
+      <div className="mb-[5rem] flex flex-col sm:flex-row border border-gray-400 justify-center">
         {/* Banner Left */}
         <div className="w-full sm:w-1/2 aspect-square max-h-[400px] sm:max-h-[600px]">
           <style>

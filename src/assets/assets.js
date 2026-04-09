@@ -33,7 +33,15 @@ export const products = [
     description:
       "A calming blend of French lavender and vanilla bean, perfect for unwinding.",
     price: 100,
-    image: [bannerImage1, bannerImage2, bannerImage3, product1],
+    image: [
+      bannerImage1,
+      bannerImage2,
+      bannerImage3,
+      product1,
+      product1,
+      product1,
+      product1,
+    ],
     features: [
       "Over 50 hours of long-lasting burn time",
       "Eco-friendly natural soy wax blend",
