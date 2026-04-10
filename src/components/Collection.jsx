@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { assets, products } from "../assets/assets";
 import Button from "./Buttons";
-import Modal from "./modal";
+import Modal from "./Modal";
 export default function Collection() {
   const [isFlipped, setIsFlipped] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState("");
