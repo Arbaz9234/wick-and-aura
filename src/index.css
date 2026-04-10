@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Outfit:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Outfit:wght@100..900&amily=Arapey:ital@0;1&display=swap");
 @import "tailwindcss";
 @theme {
   --font-sans: "Roboto", sans-serif;
   --breakpoint-xl2: 1800px;
   --breakpoint-xxl2: 2500px;
   --breakpoint-sm1: 639px;
-  --breakpoint-sm2: 589px;
+  --breakpoint-sm2: 400px;
 }
 * {
   font-family: "Outfit", sans-serif;
@@ -13,7 +13,9 @@
 .heading-font {
   font-family: "Cormorant Garamond", serif;
 }
-
+.price-font {
+  font-family: "Arapey", serif;
+}
 /* Text */
 @layer base {
   h1 {
@@ -78,7 +80,6 @@ input[type="submit"] {
 
 .card {
   position: relative;
-  border-radius: 8px;
 }
 .card-inner {
   width: 100%;
@@ -98,7 +99,6 @@ input[type="submit"] {
   inset: 0;
   backface-visibility: hidden;
   overflow: hidden;
-  border-radius: 8px;
 }
 
 .card-front {
@@ -113,7 +113,6 @@ input[type="submit"] {
   width: 100%;
   height: 100%;
   object-fit: cover; /* keeps image proportional inside the card */
-  border-radius: 8px;
 }
 /* Carousel */
 .swiper {
