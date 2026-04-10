@@ -8,7 +8,6 @@ export default function Modal({ isOpen, onClose, product }) {
   const [animating, setAnimating] = useState(false);
   const [thumbStart, setThumbStart] = useState(0);
   const mouseDownTarget = React.useRef(null);
-  const maxVisible = 3;
 
   useEffect(() => {
     if (product && product.image && product.image.length > 0) {
