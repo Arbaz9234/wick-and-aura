@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "./Buttons";
+import ThumbnailSwiper from "./ThumbnailSwiper";
 
 export default function Modal({ isOpen, onClose, product }) {
   const [mainImage, setMainImage] = useState("");
@@ -155,7 +156,7 @@ export default function Modal({ isOpen, onClose, product }) {
                 />
               </div>
               {/* Thumbnails */}
-              <div className="flex items-center gap-2 w-full justify-center">
+              {/* <div className="flex items-center gap-2 w-full justify-center">
                 {product.image.length > maxVisible && (
                   <button
                     onClick={() =>
@@ -179,7 +180,6 @@ export default function Modal({ isOpen, onClose, product }) {
                     </svg>
                   </button>
                 )}
-                {/* 80px thumb + 16px gap = 96px per item; visible width = 3*80 + 2*16 = 272px */}
                 <div
                   className="overflow-hidden"
                   style={{
@@ -238,7 +238,8 @@ export default function Modal({ isOpen, onClose, product }) {
                     </svg>
                   </button>
                 )}
-              </div>
+              </div> */}
+              <ThumbnailSwiper product={product} setMainImage={setMainImage} />
             </div>
 
             {/* Right Side: Details */}
