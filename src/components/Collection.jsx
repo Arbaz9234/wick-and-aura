@@ -78,7 +78,7 @@ export default function Collection() {
             <div className="card-inner">
               <div className="card-front group lg:rounded-[8px]">
                 <img
-                  src={assets.product1}
+                  src={product.image[0]}
                   alt="Collection Item"
                   className="w-full h-auto lg:rounded-[8px] group-hover:scale-102 transition ease-in-out"
                 />
@@ -99,7 +99,7 @@ export default function Collection() {
               <div
                 className="card-back relative lg:rounded-[8px] overflow-hidden flex flex-col items-center justify-center text-center p-6"
                 style={{
-                  backgroundImage: `url(${assets.product1})`,
+                  backgroundImage: `url(${product.image[0]})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -131,10 +131,10 @@ export default function Collection() {
             </div>
             {/* Mobile Product Info */}
             <div className="lg:hidden mt-3 text-left">
-              <h3 className="text-[18px] text-gray-900 font-medium mb-0">
+              <h3 className="text-[17px] text-gray-900 font-medium mb-0">
                 {product.name}
               </h3>
-              <p className="text-[20px] text-gray-900 price-font font-normal ">
+              <p className="text-[18px] text-gray-900 price-font font-normal ">
                 <span className="[font:inherit] text-inherit !text-[18px]">
                   ₹
                 </span>{" "}

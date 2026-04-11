@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Button from "./Buttons";
-import ThumbnailSwiper from "./ThumbnailSwiper";
+// import ThumbnailSwiper from "./ThumbnailSwiper";
 
 export default function Modal({ isOpen, onClose, product }) {
-  const [mainImage, setMainImage] = useState("");
+  const [mainImage, setMainImage] = useState();
   const [visible, setVisible] = useState(false);
   const [animating, setAnimating] = useState(false);
   const [thumbStart, setThumbStart] = useState(0);
   const mouseDownTarget = React.useRef(null);
-
+  const maxVisible = 3;
   useEffect(() => {
     if (product && product.image && product.image.length > 0) {
       setMainImage(product.image[0]);
@@ -18,7 +18,11 @@ export default function Modal({ isOpen, onClose, product }) {
   useEffect(() => {
     let timer;
     if (isOpen) {
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
       document.body.style.overflow = "hidden";
+
       setAnimating(true);
       // Trigger enter animation on next frame
       requestAnimationFrame(() => {
@@ -26,6 +30,7 @@ export default function Modal({ isOpen, onClose, product }) {
       });
     } else {
       document.body.style.overflow = "unset";
+      document.body.style.paddingRight = "0px";
       setVisible(false);
       // Wait for exit animation to finish before unmounting
       timer = setTimeout(() => setAnimating(false), 300);
@@ -37,10 +42,35 @@ export default function Modal({ isOpen, onClose, product }) {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (isOpen) {
+      window.history.pushState({ modal: true }, "");
+      const onPopState = () => {
+        handleCloseRef.current();
+      };
+      window.addEventListener("popstate", onPopState);
+      return () => window.removeEventListener("popstate", onPopState);
+    }
+  }, [isOpen]);
+
+  const handleCloseRef = React.useRef(null);
+
   const handleClose = () => {
+    if (window.history.state?.modal) {
+      window.history.back();
+      return;
+    }
     setVisible(false);
     setTimeout(() => {
       onClose(); // parent closes modal
+      resetState();
+    }, 300);
+  };
+
+  handleCloseRef.current = () => {
+    setVisible(false);
+    setTimeout(() => {
+      onClose();
       resetState();
     }, 300);
   };
@@ -155,7 +185,7 @@ export default function Modal({ isOpen, onClose, product }) {
                 />
               </div>
               {/* Thumbnails */}
-              {/* <div className="flex items-center gap-2 w-full justify-center">
+              <div className="flex items-center gap-2 w-full justify-center">
                 {product.image.length > maxVisible && (
                   <button
                     onClick={() =>
@@ -237,8 +267,8 @@ export default function Modal({ isOpen, onClose, product }) {
                     </svg>
                   </button>
                 )}
-              </div> */}
-              <ThumbnailSwiper product={product} setMainImage={setMainImage} />
+              </div>
+              {/* <ThumbnailSwiper product={product} setMainImage={setMainImage} /> */}
             </div>
 
             {/* Right Side: Details */}
@@ -275,13 +305,23 @@ export default function Modal({ isOpen, onClose, product }) {
                       </span>
                     </li>
                   ))}
+                  <l1>
+                    {product.minOrder ? (
+                      <span className="text-inherit">
+                        {" "}
+                        Min quantity required: {product.minOrder}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </l1>
                 </ul>
               )}
 
               {/* Price & Buy Now Button */}
               <div className="self-end mt-auto w-full flex sm:flex-row items-center justify-between gap-6">
                 <p className="text-2xl font-bold text-gray-900">
-                  ₹{product.price}
+                  ₹{product.price}{" "}
                 </p>
                 <Button
                   text="Buy Now"
