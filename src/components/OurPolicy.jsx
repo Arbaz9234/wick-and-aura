@@ -3,7 +3,7 @@ import React from "react";
 
 export default function OurPolicy() {
   return (
-    <div className="mt-15 flex flex-col sm:flex-row justify-around gap-12 sm:gap-2 text-center py-12 text-xs sm:text-sm md:text-base text-gray-700">
+    <div className="mt-15 flex flex-col sm:flex-row justify-around gap-12 sm:gap-2 text-center md:py-12 text-xs sm:text-sm md:text-base text-gray-700">
       <div>
         <Palette className="w-10 m-auto mb-5 h-10" color="#000000" />
         <h3 className="heading-font font-bold text-2xl mb-0">
