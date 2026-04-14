@@ -7,7 +7,6 @@ import bannerImage2 from "./banner-image-2.webp";
 import bannerImage3 from "./banner-image-3.webp";
 import logoIcon from "./logo-icon.svg";
 import logoText from "./logo-text.svg";
-import product1 from "./product1.jpg";
 import flipIcon from "./flip-icon.svg";
 import descriptionIcon from "./description-icon.svg";
 import miniBubble1 from "./mini-bubble-1.jpg";
@@ -41,7 +40,6 @@ export const assets = {
   bannerImage3,
   logoIcon,
   logoText,
-  product1,
   flipIcon,
   descriptionIcon,
 };
