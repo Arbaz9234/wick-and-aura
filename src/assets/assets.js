@@ -1,4 +1,3 @@
-import logo from "./Logo.png";
 import favicon from "./favicon.png";
 import logoHome from "./logo-homepage.svg";
 import menuIcon from "./menu-icon.svg";
@@ -31,7 +30,6 @@ import daisy1 from "./daisy-1.jpg";
 import daisy2 from "./daisy-2.jpg";
 
 export const assets = {
-  logo,
   favicon,
   logoHome,
   menuIcon,
