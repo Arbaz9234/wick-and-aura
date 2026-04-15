@@ -5,7 +5,7 @@ import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-// import { useState } from "react";
+
 export default function Banner({ onShopNowClick }) {
   const pagination = {
     clickable: true,
@@ -14,7 +14,6 @@ export default function Banner({ onShopNowClick }) {
     },
   };
 
-  // const [activeIndex, setActiveIndex] = useState(0);
   const handleSlideChange = (swiper) => {
     const bullets = document.querySelectorAll(
       ".swiper-pagination .custom-bullet",
@@ -66,7 +65,6 @@ export default function Banner({ onShopNowClick }) {
             loop={true}
             className="h-full w-full swiper-outer"
             pagination={pagination}
-            // ref={parentRef}
             onSlideChange={handleSlideChange}
           >
             <SwiperSlide>
