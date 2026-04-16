@@ -7,10 +7,15 @@ export default function Modal({ isOpen, onClose, product }) {
   const [animating, setAnimating] = useState(false);
   const [thumbStart, setThumbStart] = useState(0);
   const mouseDownTarget = React.useRef(null);
+  const mainScrollRef = React.useRef(null);
+  const thumbScrollRef = React.useRef(null);
   const maxVisible = 3;
   useEffect(() => {
     if (product && product.image && product.image.length > 0) {
       setMainImage(product.image[0]);
+      if (mainScrollRef.current) {
+        mainScrollRef.current.scrollLeft = 0;
+      }
     }
   }, [product]);
 
@@ -40,6 +45,31 @@ export default function Modal({ isOpen, onClose, product }) {
       if (timer) clearTimeout(timer);
     };
   }, [isOpen]);
+
+  const handleMainScroll = () => {
+    const el = mainScrollRef.current;
+    if (!el) return;
+    const index = Math.round(el.scrollLeft / el.clientWidth);
+    if (product?.image[index]) {
+      setMainImage(product.image[index]);
+      const thumbEl = thumbScrollRef.current;
+      if (thumbEl && thumbEl.children[index]) {
+        thumbEl.children[index].scrollIntoView({
+          behavior: "smooth",
+          inline: "center",
+          block: "nearest",
+        });
+      }
+    }
+  };
+
+  const scrollToMainImage = (index) => {
+    setMainImage(product.image[index]);
+    const el = mainScrollRef.current;
+    if (el) {
+      el.scrollTo({ left: index * el.clientWidth, behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -130,16 +160,33 @@ export default function Modal({ isOpen, onClose, product }) {
           <div className="flex flex-col md:flex-row p-4 md:p-8">
             {/* Left Side: Images */}
             <div className="md:w-1/2 p-4 flex flex-col items-center">
-              {/* Main Image */}
-              <div className="w-full max-[768px]:w-[70%] max-[639px]:w-[80%] max-[400px]:w-[100%] aspect-square rounded-xl overflow-hidden mb-6 bg-gray-50 flex items-center justify-center shadow-sm">
+              {/* Main Image - Desktop: click to change */}
+              <div className="hidden md:flex w-full aspect-square rounded-xl overflow-hidden mb-6 bg-gray-50 items-center justify-center shadow-sm">
                 <img
                   src={mainImage}
                   alt={product.name}
                   className="object-cover w-full h-full"
                 />
               </div>
-              {/* Thumbnails */}
-              <div className="flex items-center gap-2 w-full justify-center">
+
+              {/* Main Image - Mobile/Tablet: swipeable scroll-snap */}
+              <div
+                ref={mainScrollRef}
+                onScroll={handleMainScroll}
+                className="md:hidden w-full max-[768px]:w-[70%] max-[639px]:w-[80%] max-[400px]:w-[100%] aspect-square rounded-xl overflow-x-auto overflow-y-hidden mb-6 bg-gray-50 shadow-sm flex snap-x snap-mandatory scrollbar-hide"
+              >
+                {product.image.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`${product.name} ${index + 1}`}
+                    className="min-w-full h-full flex-shrink-0 object-cover snap-start"
+                  />
+                ))}
+              </div>
+
+              {/* Thumbnails - Desktop: arrow-based */}
+              <div className="hidden md:flex items-center gap-2 w-full justify-center">
                 {product.image.length > maxVisible && (
                   <button
                     onClick={() =>
@@ -221,6 +268,32 @@ export default function Modal({ isOpen, onClose, product }) {
                     </svg>
                   </button>
                 )}
+              </div>
+
+              {/* Thumbnails - Mobile/Tablet: native scroll */}
+              <div
+                ref={thumbScrollRef}
+                className="md:hidden flex gap-3 overflow-x-auto w-full scrollbar-hide"
+              >
+                {product.image.map((img, index) => (
+                  <button
+                    key={index}
+                    onClick={() => scrollToMainImage(index)}
+                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                      mainImage === img
+                        ? "border-[#4a24c5]"
+                        : "border-transparent"
+                    }`}
+                  >
+                    <img
+                      src={img}
+                      alt={`${product.name} thumbnail ${index + 1}`}
+                      className={`object-cover w-full h-full transition-opacity ${
+                        mainImage === img ? "opacity-100" : "opacity-60"
+                      }`}
+                    />
+                  </button>
+                ))}
               </div>
             </div>
 

@@ -49,12 +49,10 @@ export default function Collection() {
       </p>
       <div className="grid grid-cols-2 max-sm2:grid-cols-1  md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-8 sm:gap-5 mt-8">
         {" "}
-        {/*  sm:grid-cols-2  */}
         {productsList.map((product, index) => (
           <div
             key={product.id}
             className={`border-gray-300 lg:rounded-[8px] cursor-pointer card aspect-square sm:aspect-[4/5]  md:aspect-[3/4]  ${
-              // max-sm:!h-[400px] max-sm:h-auto
               isFlipped === index + 1 ? "active" : ""
             }`}
             onMouseDown={(e) => {
