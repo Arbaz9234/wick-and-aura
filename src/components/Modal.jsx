@@ -217,7 +217,7 @@ export default function Modal({ isOpen, onClose, product }) {
                   }}
                 >
                   <div
-                    className="flex gap-4 transition-transform duration-300 ease-in-out"
+                    className="flex gap-4 transition-transform duration-300 ease-in-out justify-center"
                     style={{
                       transform: `translateX(-${thumbStart * (80 + 16)}px)`,
                     }}
@@ -273,7 +273,7 @@ export default function Modal({ isOpen, onClose, product }) {
               {/* Thumbnails - Mobile/Tablet: native scroll */}
               <div
                 ref={thumbScrollRef}
-                className="md:hidden flex gap-3 overflow-x-auto w-full scrollbar-hide"
+                className="md:hidden flex gap-3 overflow-x-auto w-full scrollbar-hide justify-center"
               >
                 {product.image.map((img, index) => (
                   <button

@@ -106,14 +106,14 @@ export default function Collection() {
 
                 {/* Glass content */}
                 <div
-                  className="relative z-10 border border-white/30 bg-white/10 backdrop-blur-lg rounded-[12px] p-4 shadow-lg product-details"
+                  className="relative z-10 border border-white/30 bg-white/10 backdrop-blur-lg rounded-[12px] p-4 shadow-lg product-details [@media(min-width:1024px)_and_(max-width:1100px)]:p-3 [@media(min-width:1280px)_and_(max-width:1418px)]:p-3"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <h3 className="text-white max-xl:text-2xl xl:text-2xl [@media(min-width:1440px)]:text-3xl font-semibold mb-2">
                     {product.name}
                   </h3>
-                  <p className="text-gray-200 mb-4 sm:text-[17px] text-left">
-                    {truncateWords(product.description, 20)}
+                  <p className="text-gray-200 mb-4 sm:text-[17px] text-left [@media(min-width:1024px)_and_(max-width:1100px)]:text-[16px] [@media(min-width:1280px)_and_(max-width:1418px)]:text-[16px]">
+                    {truncateWords(product.description, 19)}
                   </p>
                   <Button
                     text="Explore"
