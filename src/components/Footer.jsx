@@ -99,7 +99,7 @@ export default function Footer() {
       <div>
         <hr className="border-none h-[1px] bg-gray-300" />
         <p className="py-5 text-sm text-center">
-          Copyright 2026@ wickandaura.in - All Right Reserved.
+          Copyright 2026 @ wickandaura.in - All Right Reserved.
         </p>
       </div>
     </div>
