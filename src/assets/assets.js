@@ -8,6 +8,10 @@ import logoIcon from "./logo-icon.svg";
 import logoText from "./logo-text.svg";
 import flipIcon from "./flip-icon.svg";
 import descriptionIcon from "./description-icon.svg";
+import InstagramIcon from "./instagram-icon.svg?react";
+import MailIcon from "./mail-icon.svg?react";
+import CloseIcon from "./close-icon.svg?react";
+import WhatsAppIcon from "./whatsapp-icon.svg?react";
 import miniBubble1 from "./mini-bubble-1.jpg";
 import miniBubble2 from "./mini-bubble-2.jpg";
 import tulip1 from "./tulip-bouquet-1.jpg";
@@ -40,6 +44,10 @@ export const assets = {
   logoText,
   flipIcon,
   descriptionIcon,
+  InstagramIcon,
+  WhatsAppIcon,
+  MailIcon,
+  CloseIcon,
 };
 
 export const products = [

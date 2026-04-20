@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "./Buttons";
-
+import { assets } from "../assets/assets";
 export default function Modal({ isOpen, onClose, product }) {
   const [mainImage, setMainImage] = useState();
   const [visible, setVisible] = useState(false);
@@ -141,19 +141,7 @@ export default function Modal({ isOpen, onClose, product }) {
           onClick={handleClose}
           className="absolute top-4 right-4 z-10 p-2 text-gray-500 hover:text-black bg-white/80 backdrop-blur rounded-full shadow-sm transition-transform hover:scale-110"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <assets.CloseIcon />
         </button>
 
         <div className="overflow-y-auto flex-1">
