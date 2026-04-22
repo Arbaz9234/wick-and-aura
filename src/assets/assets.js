@@ -32,6 +32,9 @@ import tulipJar1 from "./tulip-bouquet-jar-1.jpg";
 import tulipJar2 from "./tulip-bouquet-jar-2.jpg";
 import daisy1 from "./daisy-1.jpg";
 import daisy2 from "./daisy-2.jpg";
+import loaderGif from "./loader.gif";
+import loaderVideo from "./loader.mp4";
+import loaderVideo2 from "./loader-1.mp4";
 
 export const assets = {
   favicon,
@@ -48,6 +51,9 @@ export const assets = {
   WhatsAppIcon,
   MailIcon,
   CloseIcon,
+  loaderGif,
+  loaderVideo,
+  loaderVideo2,
 };
 
 export const products = [
