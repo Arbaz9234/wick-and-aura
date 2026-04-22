@@ -38,7 +38,6 @@ export default function Footer() {
                 href="mailto:wickandauracandles@gmail.com"
                 className="flex items-center gap-2 hover:text-black transition-colors duration-200"
               >
-                {/* Mail Icon */}
                 <assets.MailIcon />
                 wickandauracandles@gmail.com
               </a>
@@ -52,7 +51,6 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:text-black transition-colors duration-200"
               >
-                {/* Instagram Icon */}
                 <assets.InstagramIcon />
                 @wickandaura_
               </a>

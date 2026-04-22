@@ -136,7 +136,6 @@ export default function Modal({ isOpen, onClose, product }) {
           visible ? "scale-100 opacity-100" : "scale-75 opacity-0"
         }`}
       >
-        {/* Close Button */}
         <button
           onClick={handleClose}
           className="absolute top-4 right-4 z-10 p-2 text-gray-500 hover:text-black bg-white/80 backdrop-blur rounded-full shadow-sm transition-transform hover:scale-110"
