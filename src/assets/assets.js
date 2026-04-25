@@ -5,6 +5,7 @@ import bannerImage1 from "./banner-image-1.webp";
 import bannerImage2 from "./banner-image-2.webp";
 import bannerImage3 from "./banner-image-3.webp";
 import logoIcon from "./logo-icon.svg";
+import logoHomepage from "./logo-homepage.png";
 import logoText from "./logo-text.svg";
 import flipIcon from "./flip-icon.svg";
 import descriptionIcon from "./description-icon.svg";
@@ -12,26 +13,26 @@ import InstagramIcon from "./instagram-icon.svg?react";
 import MailIcon from "./mail-icon.svg?react";
 import CloseIcon from "./close-icon.svg?react";
 import WhatsAppIcon from "./whatsapp-icon.svg?react";
-import miniBubble1 from "./mini-bubble-1.jpg";
-import miniBubble2 from "./mini-bubble-2.jpeg";
-import tulip1 from "./tulip-bouquet-1.jpg";
-import tulip2 from "./tulip-bouquet-2.jpeg";
-import bubble1 from "./bubble-cube-1.jpg";
-import bubble2 from "./bubble-cube-2.jpg";
-import rose1 from "./rose-bouquet-1.jpg";
-import rose2 from "./rose-bouquet-2.jpg";
-import coffee1 from "./iced-coffee-1.jpg";
-import coffee2 from "./iced-coffee-2.jpeg";
-import peony1 from "./peony-jar-1.jpg";
-import peony2 from "./peony-jar-2.jpeg";
-import heart1 from "./heart-glass-1.jpg";
-import heart2 from "./heart-glass-2.jpeg";
-import daisyJar1 from "./daisy-jar-1.jpg";
-import daisyJar2 from "./daisy-jar-2.jpeg";
-import tulipJar1 from "./tulip-bouquet-jar-1.jpg";
-import tulipJar2 from "./tulip-bouquet-jar-2.jpeg";
-import daisy1 from "./daisy-1.jpg";
-import daisy2 from "./daisy-2.jpeg";
+import miniBubble1 from "./mini-bubble-1.webp";
+import miniBubble2 from "./mini-bubble-2.webp";
+import tulip1 from "./tulip-bouquet-1.webp";
+import tulip2 from "./tulip-bouquet-2.webp";
+import bubble1 from "./bubble-cube-1.webp";
+import bubble2 from "./bubble-cube-2.webp";
+import rose1 from "./rose-bouquet-1.webp";
+import rose2 from "./rose-bouquet-2.webp";
+import coffee1 from "./iced-coffee-1.webp";
+import coffee2 from "./iced-coffee-2.webp";
+import peony1 from "./peony-jar-1.webp";
+import peony2 from "./peony-jar-2.webp";
+import heart1 from "./heart-glass-1.webp";
+import heart2 from "./heart-glass-2.webp";
+import daisyJar1 from "./daisy-jar-1.webp";
+import daisyJar2 from "./daisy-jar-2.webp";
+import tulipJar1 from "./tulip-bouquet-jar-1.webp";
+import tulipJar2 from "./tulip-bouquet-jar-2.webp";
+import daisy1 from "./daisy-1.webp";
+import daisy2 from "./daisy-2.webp";
 import loaderGif from "./loader.gif";
 import loaderVideo from "./loader.mp4";
 import loaderVideo2 from "./loader-1.mp4";
@@ -39,6 +40,7 @@ import loaderVideo2 from "./loader-1.mp4";
 export const assets = {
   favicon,
   logoHome,
+  logoHomepage,
   menuIcon,
   bannerImage1,
   bannerImage2,

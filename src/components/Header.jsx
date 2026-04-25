@@ -15,6 +15,11 @@ export default function Header() {
       <p className="text-[#6e6a65] text-lg tracking-[5px] font-light">
         LIGHT UP YOUR AURA
       </p>
+      {/* <img
+        src={assets.logoHomepage}
+        alt="Wick & Aura Logo"
+        className="w-50 mt-3 mb-1"
+      /> */}
     </div>
   );
 }

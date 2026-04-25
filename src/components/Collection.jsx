@@ -38,6 +38,56 @@ export default function Collection() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  const DEBUG_AUTO_PLAY = false; // turn off when not needed
+
+  useEffect(() => {
+    if (!DEBUG_AUTO_PLAY) return;
+    if (!productsList || productsList.length === 0) return;
+
+    let isCancelled = false;
+
+    const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+    const runSequence = async () => {
+      for (let i = 0; i < productsList.length; i++) {
+        if (isCancelled) break;
+
+        console.log("Flipping card:", i);
+
+        // 1. Flip card
+        setIsFlipped(i + 1);
+        await delay(1000);
+
+        if (isCancelled) break;
+
+        console.log("Opening modal:", i);
+
+        // 2. Open modal
+        setSelectedProduct(productsList[i]);
+        setIsModalOpen(true);
+        setIsFlipped(0);
+        await delay(1000);
+
+        if (isCancelled) break;
+
+        console.log("Closing modal:", i);
+
+        // 3. Close modal
+        setIsModalOpen(false);
+        setSelectedProduct("");
+        await delay(1000);
+      }
+
+      console.log("Debug sequence complete");
+    };
+
+    runSequence();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [productsList]);
   return (
     <div className="text-center">
       <h2 className="heading-font max-xl:text-3xl xl:text-4xl [@media(min-width:1440px)]:text-5xl font-semibold leading-[1.2]">
