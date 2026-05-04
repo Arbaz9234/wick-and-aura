@@ -34,7 +34,6 @@ import tulipJar2 from "./tulip-bouquet-jar-2.webp";
 import daisy1 from "./daisy-1.webp";
 import daisy2 from "./daisy-2.webp";
 import loaderGif from "./loader.gif";
-import loaderVideo from "./loader.mp4";
 import loaderVideo2 from "./loader-1.mp4";
 
 export const assets = {
@@ -54,7 +53,6 @@ export const assets = {
   MailIcon,
   CloseIcon,
   loaderGif,
-  loaderVideo,
   loaderVideo2,
 };
 
@@ -80,7 +78,7 @@ export const products = [
     name: "Tulip Bouquet Candle",
     description:
       "A floral masterpiece inspired by fresh tulips, blended with green notes and morning dew. Elegant, refreshing, and perfect for gifting.",
-    price: 399,
+    price: 299,
     category: "Floral",
     image: [tulip1, tulip2],
     features: [
@@ -96,7 +94,7 @@ export const products = [
     name: "Bubble Cube Candle",
     description:
       "Handmade bubble cube candle infused with natural fragrances. A perfect mix of minimal design and soothing aroma.",
-    price: 199,
+    price: 149,
     category: "Decorative",
     image: [bubble1, bubble2],
     features: [
@@ -112,7 +110,7 @@ export const products = [
     name: "Rose Bouquet Candle",
     description:
       "A handcrafted rose bouquet candle that blends beauty and fragrance. Creates a romantic and cozy ambiance.",
-    price: 399,
+    price: 299,
     category: "Floral",
     image: [rose1, rose2],
     features: [
@@ -128,7 +126,7 @@ export const products = [
     name: "Iced Coffee Candle",
     description:
       "Rich caramel coffee fragrance that recreates the aroma of a creamy iced coffee. Perfect for cozy vibes.",
-    price: 499,
+    price: 399,
     category: "Gourmet",
     image: [coffee1, coffee2],
     features: [
@@ -144,7 +142,7 @@ export const products = [
     name: "Peony Jar Candle",
     description:
       "Elegant jar candle with delicate peony fragrance. Adds sophistication and serenity to your home.",
-    price: 399,
+    price: 299,
     category: "Jar",
     image: [peony1, peony2],
     features: [
@@ -160,7 +158,7 @@ export const products = [
     name: "Heart Candle Jar",
     description:
       "Romantic heart-shaped candle designed for special moments like date nights and gifting.",
-    price: 250,
+    price: 249,
     category: "Romantic",
     image: [heart1, heart2],
     features: ["Romantic ambiance", "Long-lasting burn", "Perfect gift option"],
@@ -172,7 +170,7 @@ export const products = [
     name: "Daisy Jar Candle",
     description:
       "Fresh and uplifting daisy fragrance that brightens any space. A perfect blend of beauty and calmness.",
-    price: 299,
+    price: 249,
     category: "Jar",
     image: [daisyJar1, daisyJar2],
     features: [
@@ -188,7 +186,7 @@ export const products = [
     name: "Tulip Jar Candle",
     description:
       "Premium tulip jar candle with soothing fragrance. Ideal for décor, gifting, and festive ambiance.",
-    price: 450,
+    price: 399,
     category: "Jar",
     image: [tulipJar1, tulipJar2],
     features: [
