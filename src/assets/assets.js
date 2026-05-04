@@ -34,7 +34,6 @@ import tulipJar2 from "./tulip-bouquet-jar-2.webp";
 import daisy1 from "./daisy-1.webp";
 import daisy2 from "./daisy-2.webp";
 import loaderGif from "./loader.gif";
-import loaderVideo from "./loader.mp4";
 import loaderVideo2 from "./loader-1.mp4";
 
 export const assets = {
@@ -54,7 +53,6 @@ export const assets = {
   MailIcon,
   CloseIcon,
   loaderGif,
-  loaderVideo,
   loaderVideo2,
 };
 
